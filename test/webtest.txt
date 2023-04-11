@@ -1,8 +1,2 @@
-google.com
-google.com
-google.com
-google.com
-google.com
-google.com
-google.com
-google.com
+www.google.com
+www.minecraft.com
