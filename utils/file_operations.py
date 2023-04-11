@@ -15,6 +15,7 @@ def checkFileUTF8(filename: str) -> bool:
 def getUrlsFromFile(filepath: str) -> tuple[list(), FileError]:
     if not os.path.isfile(filepath):
         return ([], FileError.NOT_FOUND)
+
     if not checkFileUTF8(filepath):
         return ([], FileError.NOT_UTF8)
 
