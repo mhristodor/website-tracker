@@ -18,7 +18,7 @@ def setupParser() -> argparse.ArgumentParser.parse_args:
         "-l",
         "--live",
         help="Keep runing until CTRL-C is pressed. Checks are performed every 10 seconds.",
-        required=True,
+        required=False,
         action="store_true",
     )
 

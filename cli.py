@@ -1,10 +1,7 @@
-from cli import file_operations as fo
-from utils import misc as misc
-from utils.enums import FileError
-from utils.enums import TerminalColor
-from cli import parser
 from cli.cli import cli
+from cli.terminal_message import mainMessage
 
 
 if __name__ == "__main__":
+    mainMessage()
     cli()

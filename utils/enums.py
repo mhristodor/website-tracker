@@ -4,7 +4,7 @@ from enum import Enum
 class FileError(Enum):
     NOT_UTF8 = "File is not encoded in UTF-8."
     NOT_FOUND = "File does not exist."
-    OK = "OK"
+    OK = "File loaded successfully."
 
 
 class TerminalColor(Enum):
@@ -18,6 +18,8 @@ class TerminalColor(Enum):
     BOLD = "\033[1m"
     UNDERLINE = "\033[4m"
 
-    ERR = "\033[91m [ERR]\033[0m"
-    OK = "\033[92m  [OK]\033[0m"
+    ERR = "\033[91m[FAIL]\033[0m"
+    OK = "\033[92m[OK]  \033[0m"
     INFO = "\033[96m[INFO]\033[0m"
+    DOWN = "\033[91m[DOWN]\033[0m"
+    REDR = "\033[96m[REDR]\033[0m"
