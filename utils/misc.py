@@ -17,3 +17,7 @@ def sanitizeURL(url: str) -> str:
 
 def validateMail(email: str) -> bool:
     return re.match(MAIL_VALIDATION, email) != None
+
+
+def move(y: int) -> None:
+    print(f"\033[{y}A")

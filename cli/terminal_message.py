@@ -42,6 +42,5 @@ def liveMode() -> None:
 def displayTable(table) -> None:
     # type of table is Table, did not include the type hint due to circular import
     print(
-        f'\n{tabulate(table.table, headers=table.header, tablefmt="outline")}\n',
-        end="\r",
+        f'\r\n{tabulate(table.table, headers=table.header, tablefmt="outline")}\n\n{TerminalColor.WARNING.value}Use CTRL-C to quit.{TerminalColor.ENDC.value}'
     )
