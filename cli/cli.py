@@ -1,4 +1,6 @@
 from cli import parser
+from cli.terminal_message import mainMessage
+
 
 from classes.config import Config
 from classes.file import FileHandler
@@ -37,6 +39,8 @@ def cli() -> None:
     signal.signal(signal.SIGINT, handler)
 
     args = parser.setupParser()
+
+    mainMessage()
 
     config = Config(vars(args))
     config.display()

@@ -23,6 +23,7 @@ def setupParser() -> argparse.ArgumentParser.parse_args:
     )
 
     parser.add_argument(
+        "-m",
         "--mail",
         type=str,
         help="Mail adress to send an alert when an website is down",
