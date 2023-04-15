@@ -70,3 +70,9 @@ def badSMTPSever() -> None:
 
 def badCredentials() -> None:
     print(f"{TerminalColor.ERR.value} Email credentials are invalid.")
+
+
+def incompleteArgs() -> None:
+    print(
+        f"{TerminalColor.ERR.value} Argument -m (mail) cannot be used without -l (live) argument."
+    )

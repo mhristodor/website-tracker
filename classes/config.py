@@ -7,7 +7,5 @@ class Config:
         for key in config:
             setattr(self, key, config[key])
 
-        self.path = os.path.abspath(self.path)
-
     def display(self):
         tm.displayConfig(self)

@@ -1,5 +1,6 @@
 from cli import parser
 from cli.terminal_message import mainMessage
+from cli.terminal_message import incompleteArgs
 from cli.mail_creds import loadCreds
 
 from classes.config import Config
@@ -36,9 +37,14 @@ def liveMode(table: Table, mail: Mail) -> None:
 
     while True:
         table.display()
+
         sleep(SLEEP_TIME)
+
         table.updateData()
-        table.checkForMail(mail)
+
+        if mail:
+            table.checkForMail(mail)
+
         move(TABLE_EXTRA_LINES + len(table.urls))
 
 
@@ -49,12 +55,18 @@ def cli() -> None:
 
     mainMessage()
 
+    if vars(args)["mail"] and not vars(args)["live"]:
+        incompleteArgs()
+        exit()
+
     config = Config(vars(args))
     config.display()
 
     file = FileHandler(config.path)
 
     fileOperations(file)
+
+    mail = None
 
     if config.mail:
         mail = Mail(loadCreds(), config.mail)
