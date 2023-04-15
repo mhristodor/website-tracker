@@ -1,10 +1,11 @@
 from cli import parser
 from cli.terminal_message import mainMessage
-
+from cli.mail_creds import loadCreds
 
 from classes.config import Config
 from classes.file import FileHandler
 from classes.table import Table
+from classes.mail import Mail
 
 from time import sleep
 import signal
@@ -24,7 +25,12 @@ def fileOperations(file: FileHandler) -> None:
     file.checkURL()
 
 
-def liveMode(table: Table) -> None:
+def mailOperations(mail: Mail) -> None:
+    mail.connectToServer()
+    mail.loginToServer()
+
+
+def liveMode(table: Table, mail: Mail) -> None:
     SLEEP_TIME = 10
     TABLE_EXTRA_LINES = 8
 
@@ -32,6 +38,7 @@ def liveMode(table: Table) -> None:
         table.display()
         sleep(SLEEP_TIME)
         table.updateData()
+        table.checkForMail(mail)
         move(TABLE_EXTRA_LINES + len(table.urls))
 
 
@@ -49,9 +56,13 @@ def cli() -> None:
 
     fileOperations(file)
 
+    if config.mail:
+        mail = Mail(loadCreds(), config.mail)
+        mailOperations(mail)
+
     table = Table(file.urls)
 
     if config.live:
-        liveMode(table)
+        liveMode(table, mail)
 
     table.display()

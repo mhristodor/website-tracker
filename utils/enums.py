@@ -23,3 +23,4 @@ class TerminalColor(Enum):
     INFO = "\033[96m[INFO]\033[0m"
     DOWN = "\033[91m[DOWN]\033[0m"
     REDR = "\033[96m[REDR]\033[0m"
+    WARN = "\033[93m[WARN]\033[0m"

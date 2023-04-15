@@ -5,6 +5,7 @@ from utils.enums import TerminalColor
 class WebsiteStatus:
     def __init__(self, website: str) -> None:
         self.website = website
+        self.mail_sent = False
 
         self.updateStatus()
 

@@ -30,12 +30,4 @@ def setupParser() -> argparse.ArgumentParser.parse_args:
         required=False,
     )
 
-    parser.add_argument(
-        "-i",
-        "--inactive",
-        type=int,
-        help="Inactivity in seconds until the mail is sent.",
-        required=False,
-    )
-
     return parser.parse_args()

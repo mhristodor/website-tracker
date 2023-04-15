@@ -44,3 +44,29 @@ def displayTable(table) -> None:
     print(
         f'\r\n{tabulate(table.table, headers=table.header, tablefmt="outline")}\n\n{TerminalColor.WARNING.value}Use CTRL-C to quit.{TerminalColor.ENDC.value}'
     )
+
+
+def noCredsFile() -> None:
+    print(
+        f"{TerminalColor.WARN.value} Credentials file not found. Please input the credentials of the e-mail address the messages will originate from."
+    )
+
+
+def enterSMTP() -> None:
+    print(f"{TerminalColor.WARN.value} SMTP server: ", end="")
+
+
+def enterEmail() -> None:
+    print(f"{TerminalColor.WARN.value} Enter e-mail address: ", end="")
+
+
+def loadedCredentials() -> None:
+    print(f"{TerminalColor.OK.value} Email credentials loaded.")
+
+
+def badSMTPSever() -> None:
+    print(f"{TerminalColor.ERR.value} SMTP Server is invalid.")
+
+
+def badCredentials() -> None:
+    print(f"{TerminalColor.ERR.value} Email credentials are invalid.")
