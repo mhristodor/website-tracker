@@ -1,6 +1,7 @@
 import smtplib, ssl
 from cli import terminal_message as tm
 from email.mime.text import MIMEText
+from datetime import datetime, timezone
 
 
 class Mail:
@@ -30,7 +31,14 @@ class Mail:
         return
 
     def sendMail(self, url: str) -> None:
-        msg = MIMEText(f"Website {url} went down.")
+        content = open("./template/mail.html", "r").read()
+
+        content = content.replace("!url!", url.split("//")[-1])
+        content = content.replace(
+            "!time!", datetime.now(timezone.utc).strftime("%m/%d/%Y, %H:%M:%S")
+        )
+
+        msg = MIMEText(content, "html")
 
         msg["Subject"] = "Website Tracker Notification"
         msg["From"] = self.creds["email"]
