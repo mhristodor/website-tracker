@@ -6,6 +6,8 @@ mail_config.json
 
 # C extensions
 *.so
+*.yml
+docs
 
 # Distribution / packaging
 .Python

@@ -1,41 +1,65 @@
 import os
 import codecs
 
-from utils.enums import FileError
+from classes.terminal import TerminalMessage
+
 from utils.misc import validateURL
 
-from cli import terminal_message as tm
+from dataclasses import dataclass, field
 
 
+@dataclass
 class FileHandler:
-    def __init__(self, file_path: str) -> None:
-        self.filepath = file_path
+    """Dataclass with file information.
 
-    def checkFileUTF8(self) -> None:
+    It stores information about the file and its contents.
+    Performs certain cheks to ensure that the file is vaild
+    and the contents are usable by the application.
+
+    Attributes:
+        file_path (str): File path.
+        lines (list[str]): A list with the lines of the file.
+        urls (list[str]): A list with the valid URLs of the file.
+
+    """
+
+    file_path: str = None
+
+    lines: list[str] = field(init=False)
+    urls: list[str] = field(init=False)
+
+    def __post_init__(self) -> None:
+        self._checkFileExists()
+        self._checkFileUTF8()
+        self._loadFile()
+        self._loadURL()
+        self._checkURL()
+
+    def _checkFileUTF8(self) -> None:
         try:
             _ = codecs.open(
-                self.filepath, encoding="utf-8", errors="strict"
+                self.file_path, encoding="utf-8", errors="strict"
             ).readlines()
         except UnicodeDecodeError:
-            tm.treatFileErrors(FileError.NOT_UTF8)
+            print(TerminalMessage.FILE_NOT_UTF8.value)
             quit()
 
-    def checkFileExists(self) -> None:
-        if not os.path.isfile(self.filepath):
-            tm.treatFileErrors(FileError.NOT_FOUND)
+    def _checkFileExists(self) -> None:
+        if not os.path.isfile(self.file_path):
+            print(TerminalMessage.FILE_NOT_EXIST.value)
             quit()
 
-    def loadFile(self) -> None:
-        with open(self.filepath, "r") as file:
+    def _loadFile(self) -> None:
+        with open(self.file_path, "r") as file:
             self.lines = file.readlines()
 
-    def loadURL(self) -> None:
+    def _loadURL(self) -> None:
         self.urls = [url.strip() for url in self.lines if validateURL(url.strip())]
-        tm.fileLoaded()
+        print(TerminalMessage.FILE_LOADED.value)
 
-    def checkURL(self) -> None:
+    def _checkURL(self) -> None:
         if len(self.urls) == 0:
-            tm.noValidURL()
+            print(TerminalMessage.NO_VALID_URL.value)
             quit()
 
-        tm.validCountURL(len(self.lines), len(self.urls))
+        print(TerminalMessage.validCountURL(len(self.lines), len(self.urls)))

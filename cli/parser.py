@@ -1,7 +1,16 @@
 import argparse
 
 
-def setupParser() -> argparse.ArgumentParser.parse_args:
+def getArguments() -> dict:
+    """Obtain arguments using argparse utility.
+
+    Defines argparse functionality and returns a
+    dictionary with arguments.
+
+    Returns:
+        dict: Dictionary of arguments passed at runtime.
+
+    """
     parser = argparse.ArgumentParser(
         description="Track website availability from command line."
     )
@@ -30,4 +39,4 @@ def setupParser() -> argparse.ArgumentParser.parse_args:
         required=False,
     )
 
-    return parser.parse_args()
+    return vars(parser.parse_args())

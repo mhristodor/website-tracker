@@ -1,11 +1,21 @@
-from cli import terminal_message as tm
-import os
+from dataclasses import dataclass
 
 
+@dataclass
 class Config:
-    def __init__(self, config: dict) -> None:
-        for key in config:
-            setattr(self, key, config[key])
+    """Configuration class for the command line application.
 
-    def display(self):
-        tm.displayConfig(self)
+    It contains the configuration passed at the command
+    line.
+
+
+    Attributes:
+        path (str): Path to a file containing a list of websites.
+        live (bool): Switch between live mode and one time mode.
+        mail (str): Mail adress where notifications will be sent.
+
+    """
+
+    path: str
+    live: bool = False
+    mail: str = None
