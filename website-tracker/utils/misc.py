@@ -47,6 +47,6 @@ def move(y: int) -> None:
     """Creates the illusion of a live table in terminal.
 
     Args:
-        y (int): Units the pointer to move upwards.
+        y (int): Amount of units the pointer has to be moved.
     """
     print(f"\033[{y}A")
